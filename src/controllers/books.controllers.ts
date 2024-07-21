@@ -7,8 +7,6 @@ import {
   BodyRequestUpdateBook,
   BodyResponseUpdateBook,
   BodyRequestCreateUser,
-  RequestLoginBooks,
-  ResponseLoginBooks,
 } from "../models/books.model";
 
 export class BooksController {

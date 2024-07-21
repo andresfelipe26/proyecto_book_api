@@ -62,14 +62,5 @@ export interface BodyRequestCreateUser {
   password: string;
 }
 
-export interface RequestLoginBooks {
-  email: string;
-  password: string;
-}
 
-export interface ResponseLoginBooks {
-  message: string;
-  data: {
-    token: string;
-  };
-}
+
