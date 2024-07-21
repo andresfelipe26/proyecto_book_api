@@ -38,28 +38,8 @@ export class BooksController {
     console.log("User created successfully");
   }
 
-  async postLogin(data: RequestLoginBooks): Promise<ResponseLoginBooks> {
-    const endpointLogin: string = "/api/v1/auth/login";
-    const headers: Record<string, string> = {
-      "Content-Type": "application/json",
-    };
+ 
 
-    const reqOptions: RequestInit = {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify(data),
-    };
-    const url = this.urlApi + endpointLogin;
-    const result: Response = await fetch(url, reqOptions);
-
-    console.log(`Status code: ${result.status}`);
-    if (result.status !== 201) {
-      console.log(`Response body: ${(await result.json()).message}`);
-      throw new Error("Not authenticated: ");
-    }
-    const responseBodyLogin: ResponseLoginBooks = await result.json();
-    return responseBodyLogin;
-  }
   async allBooks(
     token: string,
     limit: number,
