@@ -54,3 +54,22 @@ export interface BodyResponseDeleteBook {
   message: string;
   data: null;
 }
+
+export interface BodyRequestCreateUser {
+  name: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
+export interface RequestLoginBooks {
+  email: string;
+  password: string;
+}
+
+export interface ResponseLoginBooks {
+  message: string;
+  data: {
+    token: string;
+  };
+}

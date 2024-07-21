@@ -8,8 +8,52 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 export class BooksController {
-    constructor(domain) {
-        this.domain = domain;
+    constructor(urlApi) {
+        this.urlApi = urlApi;
+        this.domain = urlApi;
+    }
+    createUser(user, token) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const headers = {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            };
+            const reqOptions = {
+                method: "POST",
+                headers: headers,
+                body: JSON.stringify(user),
+            };
+            const url = this.domain + "/api/v1/users";
+            const result = yield fetch(url, reqOptions);
+            console.log(`Status code: ${result.status}`);
+            if (result.status !== 201) {
+                console.log(`Response body: ${(yield result.json()).message}`);
+                throw new Error("Failed to create user");
+            }
+            console.log("User created successfully");
+        });
+    }
+    postLogin(data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const endpointLogin = "/api/v1/auth/login";
+            const headers = {
+                "Content-Type": "application/json",
+            };
+            const reqOptions = {
+                method: "POST",
+                headers: headers,
+                body: JSON.stringify(data),
+            };
+            const url = this.urlApi + endpointLogin;
+            const result = yield fetch(url, reqOptions);
+            console.log(`Status code: ${result.status}`);
+            if (result.status !== 201) {
+                console.log(`Response body: ${(yield result.json()).message}`);
+                throw new Error("Not authenticated: ");
+            }
+            const responseBodyLogin = yield result.json();
+            return responseBodyLogin;
+        });
     }
     allBooks(token, limit, page) {
         return __awaiter(this, void 0, void 0, function* () {
